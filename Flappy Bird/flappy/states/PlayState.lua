@@ -22,6 +22,8 @@ function PlayState:init()
     self.pipePairs = {}
     self.timer = 0
     self.score = 0
+	self.paused = false
+	self.pausebuffer = false
 
     -- initialize our last recorded Y value for a gap placement to base other gaps off of
     self.lastY = -PIPE_HEIGHT + math.random(80) + 20
@@ -30,7 +32,18 @@ function PlayState:init()
 	self.deadline = 2
 end
 
+
 function PlayState:update(dt)
+    self.pausebuffer = false
+	-- exit paused functionality
+	-- exit pause state
+	if love.keyboard.wasPressed('p') and self.paused == true then
+	    self.paused = false
+		self.pausebuffer = true
+	end
+	
+	-- pauseable functionality
+    if self.paused == false then
     -- update timer for pipe spawning
     self.timer = self.timer + dt
 
@@ -103,6 +116,14 @@ function PlayState:update(dt)
             score = self.score
         })
     end
+	
+	-- enter pause state 
+	if love.keyboard.wasPressed('p') and self.pausebuffer == false then
+	    self.paused = true
+		self.pausebuffer = true
+	end
+  end -- end of paused functionality
+    
 end
 
 function PlayState:render()
