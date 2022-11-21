@@ -128,6 +128,7 @@ function PlayState:update(dt)
 		self.sources = love.audio.pause()
 		BACKGROUND_SCROLL_SPEED = 0
 		GROUND_SCROLL_SPEED = 0
+		sounds['pause']:play()
 	end
   end -- end of paused functionality
     
