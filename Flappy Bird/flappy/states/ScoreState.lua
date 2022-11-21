@@ -16,6 +16,8 @@ ScoreState = Class{__includes = BaseState}
 ]]
 function ScoreState:enter(params)
     self.score = params.score
+	if self.score >= 1 then self.medal = Medal(self.score) else end
+	if self.score >= 1 then self.medalexists = true else self.medalexists = false end
 end
 
 function ScoreState:update(dt)
@@ -34,4 +36,6 @@ function ScoreState:render()
     love.graphics.printf('Score: ' .. tostring(self.score), 0, 100, VIRTUAL_WIDTH, 'center')
 
     love.graphics.printf('Press Enter to Play Again!', 0, 160, VIRTUAL_WIDTH, 'center')
+	
+	if self.medalexists then self.medal:render() end
 end

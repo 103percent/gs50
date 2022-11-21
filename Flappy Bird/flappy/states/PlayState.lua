@@ -25,6 +25,9 @@ function PlayState:init()
 
     -- initialize our last recorded Y value for a gap placement to base other gaps off of
     self.lastY = -PIPE_HEIGHT + math.random(80) + 20
+	
+	-- random timer init
+	self.deadline = 2
 end
 
 function PlayState:update(dt)
@@ -32,7 +35,7 @@ function PlayState:update(dt)
     self.timer = self.timer + dt
 
     -- spawn a new pipe pair every second and a half
-    if self.timer > 2 then
+    if self.timer > self.deadline then
         -- modify the last Y coordinate we placed so pipe gaps aren't too far apart
         -- no higher than 10 pixels below the top edge of the screen,
         -- and no lower than a gap length (90 pixels) from the bottom
@@ -45,6 +48,7 @@ function PlayState:update(dt)
 
         -- reset timer
         self.timer = 0
+		self.deadline = 1 + math.random(2)
     end
 
     -- for every pair of pipes..
