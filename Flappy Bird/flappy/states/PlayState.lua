@@ -143,6 +143,11 @@ function PlayState:render()
     love.graphics.print('Score: ' .. tostring(self.score), 8, 8)
 
     self.bird:render()
+	
+	if self.paused == true then
+		love.graphics.setFont(hugeFont)
+		love.graphics.printf('| |', 0, 120, VIRTUAL_WIDTH, 'center')
+	end	
 end
 
 --[[
