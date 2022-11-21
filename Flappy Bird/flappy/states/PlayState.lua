@@ -42,6 +42,8 @@ function PlayState:update(dt)
 	    self.paused = false
 		self.pausebuffer = true
 		love.audio.play(self.sources)
+		BACKGROUND_SCROLL_SPEED = 30
+		GROUND_SCROLL_SPEED = 60
 	end
 	
 	-- pauseable functionality
@@ -124,6 +126,8 @@ function PlayState:update(dt)
 	    self.paused = true
 		self.pausebuffer = true
 		self.sources = love.audio.pause()
+		BACKGROUND_SCROLL_SPEED = 0
+		GROUND_SCROLL_SPEED = 0
 	end
   end -- end of paused functionality
     
