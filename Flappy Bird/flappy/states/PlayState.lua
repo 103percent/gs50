@@ -24,6 +24,7 @@ function PlayState:init()
     self.score = 0
 	self.paused = false
 	self.pausebuffer = false
+	self.sources = {}
 
     -- initialize our last recorded Y value for a gap placement to base other gaps off of
     self.lastY = -PIPE_HEIGHT + math.random(80) + 20
@@ -40,6 +41,7 @@ function PlayState:update(dt)
 	if love.keyboard.wasPressed('p') and self.paused == true then
 	    self.paused = false
 		self.pausebuffer = true
+		love.audio.play(self.sources)
 	end
 	
 	-- pauseable functionality
@@ -121,6 +123,7 @@ function PlayState:update(dt)
 	if love.keyboard.wasPressed('p') and self.pausebuffer == false then
 	    self.paused = true
 		self.pausebuffer = true
+		self.sources = love.audio.pause()
 	end
   end -- end of paused functionality
     
